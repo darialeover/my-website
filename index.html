@@ -1,12 +1,386 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Website</title> <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <h1>Hello, world!</h1>
-    <p>This is my first website.</p>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Citizens</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo+Narrow:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --yellow: #FCD639;
+      --pink: #DE6FA1;
+      --navy: #1C8DE9;
+      --grey: #333333;
+      --white: #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--yellow);
+      font-family: 'Archivo Black', sans-serif;
+      color: var(--grey);
+      overflow-x: hidden;
+    }
+
+    section {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px 8vw;
+    }
+
+    #hero {
+      align-items: center;
+      text-align: center;
+    }
+
+    #hero h1 {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: clamp(56px, 10vw, 120px);
+      letter-spacing: -0.02em;
+      color: var(--pink);
+      line-height: 1;
+      margin-bottom: 24px;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeUp 1s ease forwards 0.2s;
+    }
+
+    #hero .subtitle {
+      font-family: 'Archivo Narrow', sans-serif;
+      font-size: clamp(14px, 2vw, 20px);
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+      color: var(--grey);
+      margin-bottom: 48px;
+      opacity: 0;
+      animation: fadeUp 1s ease forwards 0.5s;
+    }
+
+    .btn {
+      display: inline-block;
+      background-color: var(--navy);
+      color: var(--white);
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 14pt;
+      padding: 18px 40px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      letter-spacing: 0.01em;
+      opacity: 0;
+      animation: fadeUp 1s ease forwards 0.8s;
+      transition: transform 0.2s ease, background 0.2s ease;
+      border-radius: 100px;
+    }
+    .btn:hover { transform: translateY(-2px); background: #d4673f; }
+
+    #manifesto { background: var(--yellow); }
+
+    #manifesto h2 {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: clamp(32px, 5vw, 64px);
+      letter-spacing: -0.02em;
+      color: var(--pink);
+      max-width: 800px;
+      line-height: 1.1;
+      margin-bottom: 60px;
+    }
+
+    .reveal-lines { display: flex; flex-direction: column; gap: 4px; margin-bottom: 48px; }
+
+    .reveal-line {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: clamp(24px, 4vw, 48px);
+      letter-spacing: -0.01em;
+      color: var(--grey);
+      opacity: 0;
+      transform: translateX(-20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal-line.visible { opacity: 1; transform: translateX(0); }
+
+    .manifesto-body {
+      max-width: 680px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .manifesto-body.visible { opacity: 1; transform: translateY(0); }
+
+    .manifesto-body p {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 14pt;
+      line-height: 1.7;
+      color: var(--grey);
+      margin-bottom: 1.2em;
+    }
+
+    #team { background: var(--yellow); }
+
+    #team h2 {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: clamp(28px, 4vw, 56px);
+      letter-spacing: -0.02em;
+      color: var(--pink);
+      margin-bottom: 64px;
+      max-width: 700px;
+      line-height: 1.1;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+    }
+
+    @media (max-width: 768px) {
+      .team-grid { grid-template-columns: 1fr; gap: 48px; }
+    }
+
+    .team-member {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .team-member.visible { opacity: 1; transform: translateY(0); }
+    .team-member:nth-child(2) { transition-delay: 0.25s; }
+
+    .team-member img {
+      width: 100%;
+      max-width: 320px;
+      aspect-ratio: 1/1;
+      object-fit: cover;
+      object-position: top;
+      display: block;
+      margin-bottom: 24px;
+    }
+
+    .team-member .role {
+      font-family: 'Archivo Narrow', sans-serif;
+      font-size: 16px;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+      color: var(--pink);
+      margin-bottom: 12px;
+    }
+
+    .team-member p {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 14pt;
+      line-height: 1.7;
+      color: var(--grey);
+      margin-bottom: 0.8em;
+    }
+
+    .team-member p.lead-line {
+      font-size: 18pt;
+      color: var(--grey);
+      margin-bottom: 16px;
+    }
+
+    #impact { background: var(--pink); }
+
+    #impact h2 {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: clamp(28px, 4vw, 56px);
+      letter-spacing: -0.02em;
+      color: var(--yellow);
+      margin-bottom: 40px;
+      max-width: 700px;
+      line-height: 1.1;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      max-width: 900px;
+    }
+
+    @media (max-width: 600px) {
+      .stats-grid { grid-template-columns: 1fr; }
+    }
+
+    .stat {
+      border-top: 2px solid var(--yellow);
+      padding-top: 20px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .stat.visible { opacity: 1; transform: translateY(0); }
+    .stat:nth-child(2) { transition-delay: 0.1s; }
+    .stat:nth-child(3) { transition-delay: 0.2s; }
+    .stat:nth-child(4) { transition-delay: 0.3s; }
+    .stat:nth-child(5) { transition-delay: 0.4s; }
+    .stat:nth-child(6) { transition-delay: 0.5s; }
+
+    .stat .stat-number {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: clamp(22px, 3vw, 32px);
+      color: var(--yellow);
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+
+    .stat .stat-desc {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 14pt;
+      line-height: 1.5;
+      color: var(--white);
+    }
+
+    #contact {
+      background: var(--yellow);
+      align-items: center;
+      text-align: center;
+    }
+
+    #contact h2 {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: clamp(40px, 8vw, 96px);
+      letter-spacing: -0.02em;
+      color: var(--pink);
+      margin-bottom: 32px;
+      line-height: 1;
+    }
+
+    #contact .contact-tagline {
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 18pt;
+      color: var(--grey);
+      margin-bottom: 16px;
+      max-width: 600px;
+    }
+
+    #contact .contact-email {
+      font-family: 'Archivo Narrow', sans-serif;
+      font-size: 16px;
+      letter-spacing: 0.08em;
+      color: var(--grey);
+      text-decoration: none;
+      border-bottom: 1px solid var(--grey);
+      padding-bottom: 2px;
+      transition: color 0.2s;
+    }
+    #contact .contact-email:hover { color: var(--pink); border-color: var(--pink); }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PAGE 1: HERO -->
+  <section id="hero">
+    <h1>Happy Citizens</h1>
+    <p class="subtitle">Place strategy &nbsp;•&nbsp; Civic engagement &nbsp;•&nbsp; Public value</p>
+    <a class="btn" href="mailto:hello@happycitizens.uk">Discuss a project</a>
+  </section>
+
+  <!-- PAGE 2: MANIFESTO -->
+  <section id="manifesto">
+    <h2>Place value has moved beyond real estate</h2>
+    <div class="reveal-lines">
+      <span class="reveal-line">It lives in engagement</span>
+      <span class="reveal-line">Trust</span>
+      <span class="reveal-line">Daily use</span>
+      <span class="reveal-line">Cultural relevance</span>
+      <span class="reveal-line">Public pride</span>
+    </div>
+    <div class="manifesto-body">
+      <p>Happy Citizens helps organisations build the public layer of place.</p>
+      <p>We design place narratives, engagement tools, research, and activations to make urban projects visible, useful, trusted and proud to be part of.</p>
+    </div>
+  </section>
+
+  <!-- PAGE 3: TEAM -->
+  <section id="team">
+    <h2>One team<br>Two forms of intelligence</h2>
+    <div class="team-grid">
+      <div class="team-member">
+        <img src="daria.jpg" alt="Daria — Lead Civic" />
+        <p class="role">Lead civic</p>
+        <p class="lead-line">Daria reads the system</p>
+        <p>Sociologist. Community engagement lead. Strategic communications specialist.</p>
+        <p>She came to urban work through marketing and spent 12 years working within city governments and public-sector teams.</p>
+        <p>She knows how institutions think. How they frame projects. What language unlocks approval. How to engage the public in ways that build trust and a sense of belonging.</p>
+      </div>
+      <div class="team-member">
+        <img src="dan.jpg" alt="Dan — Lead Spatial" />
+        <p class="role">Lead spatial</p>
+        <p class="lead-line">Dan reads the place.</p>
+<p>Award-winning architect. Principal design architect. Placemaking strategist.</p>
+<p>He brings a visionary outlook and 15 years of experience crafting public spaces through dialogue with city users.</p>
+<p>He turns spatial ideas into shared visions.<br />He helps stakeholders understand what is being built, why it matters, and how it will become part of everyday life.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAGE 4: IMPACT -->
+  <section id="impact">
+    <h2>Experience across places, people, and public trust</h2>
+    <div class="stats-grid">
+      <div class="stat">
+        <p class="stat-number">300+ interviews conducted</p>
+        <p class="stat-desc">With residents, experts, public-sector teams, businesses, cultural actors, and community representatives.</p>
+      </div>
+      <div class="stat">
+        <p class="stat-number">40+ stakeholder engagement campaigns designed</p>
+        <p class="stat-desc">Across urban development, public consultation, cultural placemaking, destination storytelling, and civic participation.</p>
+      </div>
+      <div class="stat">
+        <p class="stat-number">200+ public-facing campaigns delivered annually</p>
+        <p class="stat-desc">Across city communications, resident engagement, public services, civic storytelling, and institutional reputation.</p>
+      </div>
+      <div class="stat">
+        <p class="stat-number">10+ cities and regions</p>
+        <p class="stat-desc">Moscow, London, Greater London, Leeds, Mannheim, Tbilisi, Tel Aviv, Muscat, Dubai, Abu Dhabi.</p>
+      </div>
+      <div class="stat">
+        <p class="stat-number">8M+ residents reached</p>
+        <p class="stat-desc">Through city-scale digital engagement platforms and public-facing communication systems.</p>
+      </div>
+      <div class="stat">
+        <p class="stat-number">18M impressions generated</p>
+        <p class="stat-desc">Through culture-led placemaking and civic storytelling.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAGE 5: CONTACT -->
+  <section id="contact">
+    <h2>Contact</h2>
+    <p class="contact-tagline">Let's build the public layer of your project</p>
+    <p style="font-family:'Archivo Black',sans-serif;font-size:14pt;color:var(--grey);margin-bottom:16px;">For partnerships, projects, and advisory work:</p>
+    <a class="contact-email" href="mailto:hello@happycitizens.uk">hello@happycitizens.uk</a>
+  </section>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.reveal-line').forEach((el, i) => {
+      el.style.transitionDelay = (i * 0.15) + 's';
+      observer.observe(el);
+    });
+
+    document.querySelectorAll('.manifesto-body, .team-member, .stat, #impact .places').forEach(el => {
+      observer.observe(el);
+    });
+  </script>
+</body>
 </html>
