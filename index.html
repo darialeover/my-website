@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -38,6 +36,7 @@
     #hero {
       align-items: center;
       text-align: center;
+      position: relative;
     }
 
     #hero h1 {
@@ -141,7 +140,11 @@
     }
 
     @media (max-width: 768px) {
-      .team-grid { grid-template-columns: 1fr; gap: 48px; }
+       .logo {
+    position: absolute;
+    top: 21px;
+    left: 21px;
+    }
     }
 
     .team-member {
@@ -275,20 +278,29 @@
     @keyframes fadeUp {
       to { opacity: 1; transform: translateY(0); }
     }
+
     .logo {
-  position: fixed;
-  top: 21px;
-  left: 21px;
-  width: 60px;
-  z-index: 1000;
-  border-radius: 50%;
-}
+      position: fixed;
+      top: 21px;
+      left: 21px;
+      width: 60px;
+      z-index: 1000;
+      border-radius: 50%;
+    }
+
+    @media (max-width: 768px) {
+      .logo {
+        position: absolute;
+      }
+    }
   </style>
+  <link rel="icon" type="image/png" href="logo_HC.png" />
 </head>
-<body> <img class="logo" src="logo_HC.png" alt="Happy Citizens logo" />
+<body> 
 
   <!-- PAGE 1: HERO -->
   <section id="hero">
+    <img class="logo" src="logo_HC.png" alt="Happy Citizens logo" />
     <h1>Happy Citizens</h1>
     <p class="subtitle">Place strategy &nbsp;•&nbsp; Civic engagement &nbsp;•&nbsp; Public value</p>
     <a class="btn" href="mailto:hello@happycitizens.uk">Discuss a project</a>
