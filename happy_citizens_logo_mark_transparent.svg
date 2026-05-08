@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Happy Citizens logo mark">
+  <!-- Transparent background -->
+  <rect x="340" y="270" width="92" height="440" rx="46" fill="#FCD639" transform="rotate(28 386 490)"/>
+  <rect x="505" y="270" width="92" height="440" rx="46" fill="#DE6FA1" transform="rotate(28 551 490)"/>
+  <circle cx="700" cy="645" r="58" fill="#333333"/>
+</svg>
