@@ -282,51 +282,27 @@
 }
     }
 
-   @media (max-width: 768px) {
-      .team-grid { grid-template-columns: 1fr; gap: 48px; }
-    }
+  @media (max-width: 900px) {
+  .logo {
+    position: absolute;
+    top: 21px;
+    left: 21px;
+  }
+  .team-grid {
+    grid-template-columns: 1fr !important;
+    gap: 48px !important;
+  }
+  .team-member img {
+    max-width: 100%;
+    height: 300px;
+    object-fit: cover;
+    object-position: top;
+  }
+  .stats-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
 
-    .team-member {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
-    }
-    .team-member.visible { opacity: 1; transform: translateY(0); }
-    .team-member:nth-child(2) { transition-delay: 0.25s; }
-
-    .team-member img {
-      width: 100%;
-      max-width: 320px;
-      aspect-ratio: 1/1;
-      object-fit: cover;
-      object-position: top;
-      display: block;
-      margin-bottom: 24px;
-    }
-
-    .team-member .role {
-      font-family: 'Archivo Narrow', sans-serif;
-      font-size: 16px;
-      letter-spacing: 0.11em;
-      text-transform: uppercase;
-      color: var(--pink);
-      margin-bottom: 12px;
-    }
-
-    .team-member p {
-      font-family: 'Archivo Black', sans-serif;
-      font-size: 14pt;
-      line-height: 1.7;
-      color: var(--grey);
-      margin-bottom: 0.8em;
-    }
-
-    .team-member p.lead-line {
-      font-size: 18pt;
-      color: var(--grey);
-      margin-bottom: 16px;
-    }
-    
   </style>
   <link rel="icon" type="image/svg+xml" href="happy_citizens_logo_mark_transparent.svg" />
 </head>
