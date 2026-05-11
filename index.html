@@ -137,8 +137,8 @@
 
     .team-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 64px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 64px;
     }
 
     .team-member {
@@ -289,9 +289,8 @@
     left: 21px;
   }
   .team-grid {
-    display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 64px;
+    grid-template-columns: 1fr !important;
+    gap: 48px !important;
   }
   .team-member img {
     max-width: 100%;
