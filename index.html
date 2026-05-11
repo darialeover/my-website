@@ -289,8 +289,9 @@
     left: 21px;
   }
   .team-grid {
-    grid-template-columns: 1fr !important;
-    gap: 48px !important;
+    display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 64px;
   }
   .team-member img {
     max-width: 100%;
